@@ -7,14 +7,14 @@ default: &default
 
 development:
   <<: *default
-  database: rails5base_development
+  database: try_voice_parse_development
 
 test:
   <<: *default
-  database: rails5base_test
+  database: try_voice_parse_test
 
 production:
   <<: *default
-  database: rails5base_production
-  username: rails5base
+  database: try_voice_parse_production
+  username: try_voice_parse
   password: <%= ENV['RAILS_BASE_DATABASE_PASSWORD'] %>
