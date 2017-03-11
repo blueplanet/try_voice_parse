@@ -361,6 +361,7 @@ DEPENDENCIES
   devise-bootstrap-views
   font-awesome-rails
   google-cloud
+  googleauth
   jbuilder
   jquery-rails
   kaminari

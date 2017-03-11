@@ -23,6 +23,7 @@ gem 'devise-bootstrap-views'
 gem 'pg'
 gem 'config'
 
+gem 'googleauth'
 gem 'google-cloud'
 
 group :development, :test do
