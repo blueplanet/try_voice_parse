@@ -23,8 +23,7 @@ gem 'devise-bootstrap-views'
 gem 'pg'
 gem 'config'
 
-gem 'googleauth'
-gem 'google-cloud'
+gem 'faraday'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
