@@ -1,0 +1,8 @@
+= bootstrap_form_for @voice do |f|
+  = f.error_summary
+
+  = f.text_field :name
+  = f.text_field :wav
+  = f.text_field :lang
+  = f.form_group do
+    = f.submit class: 'btn btn-primary'

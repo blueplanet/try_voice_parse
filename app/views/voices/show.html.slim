@@ -1,0 +1,11 @@
+dl.dl-horizontal
+  dt Name
+  dd = @voice.name
+  dt Wav
+  dd = @voice.wav
+  dt Lang
+  dd = @voice.lang
+
+= link_to 'Edit', edit_voice_path(@voice)
+=<> '|'
+= link_to 'Back', voices_path
