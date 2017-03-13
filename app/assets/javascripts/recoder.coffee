@@ -1,23 +1,45 @@
 $ ->
   initRecoder() if $('#recoder')
 
-
 initRecoder = ->
-  audioStream = navigator.getUserMedia(
-    {video: false, audio: true},
-    (stream) -> {},
-    (error) -> {}
-  )
+  stream = null
+  recorder = null
+  chunks = []
+  downloadLink = $('a#download')[0]
 
-  rec = new Recoder(source, {})
 
   $('#recoder #start-record').on 'click', (e) ->
-    alert 'start'
     e.preventDefault()
-    rec.record()
 
-  $('#recoder #stop-record').on 'click', ->
-    alert 'stop'
+    navigator.getUserMedia(
+      { video: false, audio: true},
+      (streamParam) ->
+        stream = streamParam
+        recorder = new MediaRecorder(stream)
 
+        recorder.ondataavailable = (e) ->
+          chunks.push(e.data)
+
+        recorder.onstop = ->
+          console.log(chunks)
+
+          blob = new Blob(chunks, { type: 'video/webm' })
+          console.log(blob)
+
+          chunks = []
+          # TODO: wavに保存する
+
+        recorder.start()
+      ,
+      (error) ->
+        console.log(error)
+    )
+
+
+  $('#recoder #stop-record').on 'click', (e) ->
     e.preventDefault()
-    rec.stop()
+
+    stream.getAudioTracks()[0].stop()
+    recorder.stop()
+
+
