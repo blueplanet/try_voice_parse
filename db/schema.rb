@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20170312221907) do
 
   create_table "voices", force: :cascade do |t|
     t.string   "name"
-    t.string   "wav"
+    t.binary   "wav"
     t.string   "lang"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

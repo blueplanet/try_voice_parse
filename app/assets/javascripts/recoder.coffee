@@ -32,11 +32,12 @@ initRecoder = ->
           recorder.onstop = ->
             console.log(chunks)
 
-            blob = new Blob(chunks, { type: 'audio/wav' })
+            blob = new Blob(chunks, { type: 'video/webm' })
             console.log(blob)
 
             chunks = []
-            # TODO: wavに保存する
+            $('voice_wav')[0].value(blob)
+
 
           recorder.start()
           recording = true

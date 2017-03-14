@@ -2,7 +2,7 @@ dl.dl-horizontal
   dt Name
   dd = @voice.name
   dt Wav
-  dd = @voice.wav
+  dd = number_to_human_size @voice.wav.size
   dt Lang
   dd = @voice.lang
 
