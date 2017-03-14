@@ -2,44 +2,49 @@ $ ->
   initRecoder() if $('#recoder')
 
 initRecoder = ->
+  recording = false
   stream = null
   recorder = null
   chunks = []
   downloadLink = $('a#download')[0]
 
 
-  $('#recoder #start-record').on 'click', (e) ->
+  $('#recoder #record-button').on 'click', (e) ->
     e.preventDefault()
 
-    navigator.getUserMedia(
-      { video: false, audio: true},
-      (streamParam) ->
-        stream = streamParam
-        recorder = new MediaRecorder(stream)
+    if recording == true
+      stream.getAudioTracks()[0].stop()
+      recorder.stop()
 
-        recorder.ondataavailable = (e) ->
-          chunks.push(e.data)
+      recording = false
+      $(e.target).text('録音開始')
+      $(e.target).toggleClass('btn-warning btn-danger')
+    else
+      navigator.getUserMedia(
+        { video: false, audio: true},
+        (streamParam) ->
+          stream = streamParam
+          recorder = new MediaRecorder(stream)
 
-        recorder.onstop = ->
-          console.log(chunks)
+          recorder.ondataavailable = (e) ->
+            chunks.push(e.data)
 
-          blob = new Blob(chunks, { type: 'video/webm' })
-          console.log(blob)
+          recorder.onstop = ->
+            console.log(chunks)
 
-          chunks = []
-          # TODO: wavに保存する
+            blob = new Blob(chunks, { type: 'audio/wav' })
+            console.log(blob)
 
-        recorder.start()
-      ,
-      (error) ->
-        console.log(error)
-    )
+            chunks = []
+            # TODO: wavに保存する
 
-
-  $('#recoder #stop-record').on 'click', (e) ->
-    e.preventDefault()
-
-    stream.getAudioTracks()[0].stop()
-    recorder.stop()
+          recorder.start()
+          recording = true
+          $(e.target).text('録音停止')
+          $(e.target).toggleClass('btn-warning btn-danger')
+        ,
+        (error) ->
+          console.log(error)
+      )
 
 
