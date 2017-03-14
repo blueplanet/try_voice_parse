@@ -12,7 +12,7 @@ table.table
     - @voices.each do |voice|
       tr
         td = voice.name
-        td = number_to_human_size voice.wav.size
+        td = audio_tag "voice_#{voice.id}.wav", controls: true
         td = voice.lang
         td
           .btn-group.btn-group-sm

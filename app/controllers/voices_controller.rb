@@ -25,6 +25,7 @@ class VoicesController < ApplicationController
   # POST /voices.json
   def create
     @voice = Voice.new(voice_params)
+    @voice.wav = Base64.decode64(@voice.wav)
 
     respond_to do |format|
       if @voice.save
@@ -40,8 +41,11 @@ class VoicesController < ApplicationController
   # PATCH/PUT /voices/1
   # PATCH/PUT /voices/1.json
   def update
+    @voice.assign_attributes(voice_params)
+    @voice.wav = Base64.decode64(@voice.wav)
+
     respond_to do |format|
-      if @voice.update(voice_params)
+      if @voice.save
         format.html { redirect_to @voice, notice: 'Voice was successfully updated.' }
         format.json { render :show, status: :ok, location: @voice }
       else

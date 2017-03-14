@@ -6,10 +6,8 @@ initRecoder = ->
   stream = null
   recorder = null
   chunks = []
-  downloadLink = $('a#download')[0]
 
-
-  $('#recoder #record-button').on 'click', (e) ->
+  $('#recoder a#record-button').on 'click', (e) ->
     e.preventDefault()
 
     if recording == true
@@ -36,7 +34,10 @@ initRecoder = ->
             console.log(blob)
 
             chunks = []
-            $('voice_wav')[0].value(blob)
+            reader = new FileReader()
+            reader.readAsDataURL(blob)
+            reader.onloaded = ->
+              $('#voice_wav')[0].value = reader.result
 
 
           recorder.start()

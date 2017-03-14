@@ -2,11 +2,11 @@
   = f.error_summary
 
   = f.text_field :name
-  = f.file_field :wav
+  = f.hidden_field :wav, value: nil
   = f.text_field :lang
   = f.form_group do
     #recoder
-      button#record-button.btn.btn-warning 録音開始
+      a#record-button.btn.btn-warning 録音開始
 
 
   = f.form_group do
