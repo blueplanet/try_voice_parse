@@ -1,0 +1,13 @@
+= bootstrap_form_for @voice do |f|
+  = f.error_summary
+
+  = f.text_field :name
+  = f.hidden_field :wav, value: nil
+  = f.text_field :lang
+  = f.form_group do
+    #recoder
+      a#record-button.btn.btn-warning 録音開始
+
+
+  = f.form_group do
+    = f.submit class: 'btn btn-primary'
